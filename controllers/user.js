@@ -15,13 +15,12 @@ export const getUsers = async (req, res) => {
 };
 
 export const addUser = async (req, res) => {
-  const { firstName, lastName, email, sex, age } = req.body;
+  const { firstName, lastName, email, age } = req.body;
   try {
     const newUser = await new User({
       firstName,
       lastName,
       email,
-      sex,
       age,
     });
     await newUser.validate();
@@ -35,14 +34,13 @@ export const addUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { firstName, lastName, email, sex, age } = req.body;
+    const { firstName, lastName, email, age } = req.body;
     const updatedUser = await User.findOneAndUpdate(
       { _id: id },
       {
         firstName,
         lastName,
         email,
-        sex,
         age,
       },
       { runValidators: true, new: true }
